@@ -1,38 +1,1645 @@
-# 🦊 Pelt & Powder Portfolio Website
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Artist portfolio, commission info, gallery, and links." />
+  <meta name="keywords" content="portfolio, furry art, commissions, deviantart, art gallery, character design" />
+  <meta name="author" content="YourNameHere" />
+  <title>YourNameHere | Portfolio</title>
 
-This is the official portfolio website for **SolarisGooFox**.
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --bg2: #12121a;
+      --card: rgba(255,255,255,0.05);
+      --card2: rgba(255,255,255,0.07);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.7);
+      --muted2: rgba(255,255,255,0.55);
+      --border: rgba(255,255,255,0.12);
+      --border2: rgba(255,255,255,0.08);
+      --accent: #ff4d8d;
+      --accent2: #ff2e79;
+      --accentGlow: rgba(255,77,141,0.35);
+      --good: #4dffb5;
+      --warn: #ffd84d;
+      --bad: #ff4d4d;
+      --shadow: rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius2: 12px;
+      --maxWidth: 1200px;
+    }
 
-It is a dark neon furry-themed portfolio website designed for sharing on:
+    /* Light theme */
+    body.light {
+      --bg: #f7f7fb;
+      --bg2: #ffffff;
+      --card: rgba(0,0,0,0.04);
+      --card2: rgba(0,0,0,0.06);
+      --text: #121218;
+      --muted: rgba(0,0,0,0.7);
+      --muted2: rgba(0,0,0,0.55);
+      --border: rgba(0,0,0,0.12);
+      --border2: rgba(0,0,0,0.08);
+      --shadow: rgba(0,0,0,0.08);
+    }
 
-- DeviantArt
-- FurAffinity
-- YouTube
-- Other art communities
+    * {
+      box-sizing: border-box;
+    }
 
-The website includes:
+    html {
+      scroll-behavior: smooth;
+    }
 
-✅ Dark neon furry theme  
-✅ Animated glowing buttons  
-✅ Custom banner background  
-✅ Full image gallery with zoom pop-up modal  
-✅ Commission pricing page  
-✅ Terms of Service page  
-✅ FAQ page  
-✅ Contact page with email form  
-✅ Age-gate NSFW toggle system  
-✅ Search + filter gallery system  
-✅ Light/Dark theme switcher (optional)
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, rgba(255,77,141,0.15), transparent 50%),
+                  radial-gradient(circle at bottom, rgba(77,255,181,0.08), transparent 55%),
+                  linear-gradient(to bottom, var(--bg), var(--bg2));
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
----
+    /* Top navigation bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border2);
+    }
 
-# 🌐 Live Website
+    body.light .topbar {
+      background: rgba(255,255,255,0.75);
+    }
 
-Once hosted, the site will be available here:
+    .topbar-inner {
+      max-width: var(--maxWidth);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      gap: 10px;
+    }
 
-**https://pelt-powder.github.io**
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+    }
 
----
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #7a4dff);
+      box-shadow: 0 0 30px var(--accentGlow);
+      border: 1px solid var(--border);
+    }
 
-# 📁 File Structure
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
 
-This website is designed to be extremely simple and easy to edit.
+    .logo-text strong {
+      font-size: 1.05em;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text span {
+      font-size: 0.85em;
+      color: var(--muted2);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .nav-links button {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+      font-size: 0.92em;
+    }
+
+    .nav-links button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,77,141,0.55);
+      box-shadow: 0 0 18px rgba(255,77,141,0.2);
+    }
+
+    .nav-links button.active {
+      background: rgba(255,77,141,0.18);
+      border-color: rgba(255,77,141,0.55);
+    }
+
+    .nav-links button.special {
+      background: var(--accent);
+      border-color: rgba(255,77,141,0.8);
+      color: white;
+      box-shadow: 0 0 18px rgba(255,77,141,0.35);
+    }
+
+    .nav-links button.special:hover {
+      background: var(--accent2);
+    }
+
+    /* Hero */
+    header.hero {
+      max-width: var(--maxWidth);
+      margin: auto;
+      padding: 65px 18px 45px;
+      text-align: center;
+    }
+
+    header.hero h1 {
+      font-size: clamp(2.3em, 5vw, 4em);
+      margin: 0;
+      text-shadow: 0 0 25px rgba(255,77,141,0.18);
+    }
+
+    header.hero p {
+      max-width: 900px;
+      margin: 16px auto 0;
+      font-size: 1.15em;
+      opacity: 0.88;
+      line-height: 1.5;
+    }
+
+    .hero-tags {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border2);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.9em;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .hero-buttons a {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid var(--border2);
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      transition: 0.2s;
+      min-width: 150px;
+    }
+
+    .hero-buttons a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,77,141,0.55);
+      box-shadow: 0 0 20px rgba(255,77,141,0.2);
+    }
+
+    .hero-buttons a.main {
+      background: var(--accent);
+      border-color: rgba(255,77,141,0.8);
+      color: white;
+      box-shadow: 0 0 25px rgba(255,77,141,0.25);
+    }
+
+    .hero-buttons a.main:hover {
+      background: var(--accent2);
+    }
+
+    /* Sections */
+    .section {
+      max-width: var(--maxWidth);
+      margin: auto;
+      padding: 45px 18px;
+    }
+
+    .section-title {
+      font-size: 2em;
+      margin-bottom: 18px;
+      border-left: 6px solid var(--accent);
+      padding-left: 14px;
+    }
+
+    .section-subtitle {
+      margin-top: -8px;
+      margin-bottom: 22px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 10px 35px var(--shadow);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 980px) {
+      .grid-3, .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Gallery */
+    .gallery-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .gallery-controls input,
+    .gallery-controls select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      padding: 12px;
+      border-radius: 12px;
+      color: var(--text);
+      outline: none;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    body.light .gallery-controls input,
+    body.light .gallery-controls select {
+      background: rgba(0,0,0,0.03);
+    }
+
+    .gallery-controls button {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border2);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .gallery-controls button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,77,141,0.55);
+      box-shadow: 0 0 20px rgba(255,77,141,0.2);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .art-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .art-card:hover {
+      transform: scale(1.02);
+      border-color: rgba(255,77,141,0.5);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .art-info {
+      padding: 14px;
+    }
+
+    .art-info h3 {
+      margin: 0;
+      font-size: 1.1em;
+    }
+
+    .art-info p {
+      margin-top: 6px;
+      margin-bottom: 0;
+      font-size: 0.9em;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .art-meta {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .art-meta span {
+      font-size: 0.82em;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 9999;
+      padding: 18px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(980px, 100%);
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      animation: pop 0.15s ease-out;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.96); opacity: 0.5; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border2);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .modal-header strong {
+      font-size: 1em;
+    }
+
+    .modal-header button {
+      border: none;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .modal-header button:hover {
+      border-color: rgba(255,77,141,0.55);
+    }
+
+    .modal-body {
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+    }
+
+    .modal-body img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: black;
+      display: block;
+    }
+
+    .modal-details {
+      padding: 16px;
+    }
+
+    .modal-details h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .modal-details p {
+      margin-top: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .modal-details a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .modal-details a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 850px) {
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+      .modal-body img {
+        height: 320px;
+      }
+    }
+
+    /* About */
+    .about-box p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin-top: 0;
+    }
+
+    /* Pricing */
+    .price-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.35em;
+    }
+
+    .price-card .price {
+      font-size: 2em;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .price-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .price-card .badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82em;
+      font-weight: bold;
+      background: rgba(255,77,141,0.18);
+      border: 1px solid rgba(255,77,141,0.4);
+    }
+
+    /* FAQ */
+    details {
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 14px 14px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+    }
+
+    details summary {
+      font-weight: bold;
+      color: var(--text);
+      outline: none;
+    }
+
+    details p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    /* Contact form */
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border2);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      outline: none;
+      font-size: 1em;
+    }
+
+    body.light .contact-form input,
+    body.light .contact-form textarea {
+      background: rgba(0,0,0,0.03);
+    }
+
+    .contact-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,77,141,0.7);
+      background: var(--accent);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1em;
+    }
+
+    .contact-form button:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 35px 18px;
+      border-top: 1px solid var(--border2);
+      color: var(--muted2);
+      font-size: 0.95em;
+    }
+
+    /* Page system */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Age Gate */
+    .agegate {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .agegate-box {
+      max-width: 700px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.55);
+    }
+
+    .agegate-box h2 {
+      margin-top: 0;
+      font-size: 2em;
+      color: var(--accent);
+    }
+
+    .agegate-box p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .agegate-buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .agegate-buttons button {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border2);
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+      transition: 0.2s;
+    }
+
+    .agegate-buttons .yes {
+      background: var(--accent);
+      color: white;
+      border-color: rgba(255,77,141,0.7);
+    }
+
+    .agegate-buttons .yes:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .agegate-buttons .no {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .agegate-buttons .no:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,77,141,0.45);
+    }
+
+    /* Scrollbar nice look */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.02);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,77,141,0.35);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,77,141,0.55);
+    }
+
+    /* Small utilities */
+    .muted {
+      color: var(--muted);
+    }
+
+    .divider {
+      margin: 25px 0;
+      border-top: 1px solid var(--border2);
+    }
+
+    .note {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,216,77,0.35);
+      background: rgba(255,216,77,0.08);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.55;
+    }
+
+    body.light .note {
+      color: rgba(0,0,0,0.85);
+    }
+
+    .success {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(77,255,181,0.35);
+      background: rgba(77,255,181,0.08);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.55;
+    }
+
+    body.light .success {
+      color: rgba(0,0,0,0.85);
+    }
+
+    .danger {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,77,77,0.35);
+      background: rgba(255,77,77,0.08);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.55;
+    }
+
+    body.light .danger {
+      color: rgba(0,0,0,0.85);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- AGE GATE (Optional) -->
+<div class="agegate" id="agegate">
+  <div class="agegate-box">
+    <h2>⚠ Age Gate</h2>
+    <p>
+      This portfolio may include transformation themes, horror, sci-fi infection concepts,
+      and mature artwork. If you are under 18, you should not view adult content.
+    </p>
+
+    <p class="muted">
+      Choose an option below. Your selection will be saved locally in your browser.
+    </p>
+
+    <div class="agegate-buttons">
+      <button class="yes" onclick="allowAdultContent()">I am 18+ (Enter Site)</button>
+      <button class="no" onclick="denyAdultContent()">I am under 18 (Safe Mode)</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-badge"></div>
+      <div class="logo-text">
+        <strong>YourNameHere</strong>
+        <span>Portfolio • Commissions • Gallery</span>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button class="active" onclick="showPage('home', this)">Home</button>
+      <button onclick="showPage('gallery', this)">Gallery</button>
+      <button onclick="showPage('commissions', this)">Commissions</button>
+      <button onclick="showPage('tos', this)">TOS</button>
+      <button onclick="showPage('faq', this)">FAQ</button>
+      <button onclick="showPage('contact', this)">Contact</button>
+      <button class="special" onclick="toggleTheme()">Theme</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO HEADER -->
+<header class="hero">
+  <h1>🔥 YourNameHere</h1>
+  <p>
+    Welcome to my art portfolio! I create furry artwork, transformation art, character designs,
+    horror infection concepts, sci-fi creatures, and original worlds.  
+    This website works as a professional hub you can link on DeviantArt, FurAffinity, YouTube,
+    Discord servers, or anywhere else.
+  </p>
+
+  <div class="hero-tags">
+    <span class="tag">Furry Art</span>
+    <span class="tag">Transformation</span>
+    <span class="tag">Sci-Fi Infection</span>
+    <span class="tag">Character Design</span>
+    <span class="tag">Horror</span>
+    <span class="tag">Commissions</span>
+    <span class="tag">OC Lore</span>
+    <span class="tag">Digital Art</span>
+    <span class="tag">Animation</span>
+    <span class="tag">3D + Blender</span>
+  </div>
+
+  <div class="hero-buttons">
+    <a class="main" href="#gallery" onclick="showPage('gallery')">View Gallery</a>
+    <a href="https://www.deviantart.com/" target="_blank">DeviantArt</a>
+    <a href="https://www.furaffinity.net/" target="_blank">FurAffinity</a>
+    <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+    <a href="mailto:youremail@gmail.com">Email Me</a>
+  </div>
+</header>
+
+<!-- HOME PAGE -->
+<div class="page active" id="home">
+
+  <div class="section">
+    <div class="section-title">🌟 Welcome</div>
+    <p class="section-subtitle">
+      This site is built to be your complete artist profile hub.  
+      You can host it on GitHub Pages or Netlify and link it on DeviantArt.
+    </p>
+
+    <div class="grid-2">
+      <div class="card about-box">
+        <h2>👤 About the Artist</h2>
+        <p>
+          Hi! I’m <b>YourNameHere</b>. I make furry art, character designs, and transformation-themed artwork.
+          I enjoy creating lore-heavy worlds with horror infection elements and dramatic scenes.
+        </p>
+
+        <p>
+          My goal is to create art that feels like it came from a story universe—something you can imagine
+          as a game, animation, comic, or even a modded world.
+        </p>
+
+        <div class="divider"></div>
+
+        <p>
+          <b>Favorite Themes:</b> Sci-Fi infection, fantasy magic, horror, transformation, creatures, alien biology  
+          <br>
+          <b>Software:</b> Blender, Photoshop/GIMP, Clip Studio Paint, Krita (edit this)  
+          <br>
+          <b>Commissions:</b> Open / Closed (edit this)  
+          <br>
+          <b>Languages:</b> English (edit this)
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>📌 Quick Links</h2>
+        <p class="muted">
+          Put these links anywhere: DeviantArt bio, YouTube description, Discord profile, etc.
+        </p>
+
+        <div class="divider"></div>
+
+        <p><b>DeviantArt:</b> <a href="https://www.deviantart.com/" target="_blank" style="color:var(--accent);">Click Here</a></p>
+        <p><b>FurAffinity:</b> <a href="https://www.furaffinity.net/" target="_blank" style="color:var(--accent);">Click Here</a></p>
+        <p><b>YouTube:</b> <a href="https://www.youtube.com/" target="_blank" style="color:var(--accent);">Click Here</a></p>
+        <p><b>Twitter/X:</b> <a href="https://twitter.com/" target="_blank" style="color:var(--accent);">Click Here</a></p>
+        <p><b>Discord:</b> YourDiscord#0000</p>
+        <p><b>Email:</b> youremail@gmail.com</p>
+
+        <div class="divider"></div>
+
+        <div class="success">
+          ✅ Tip: Replace these links with your real profile URLs.
+          Once hosted, you can use your website as your main link hub.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔥 Featured Highlights</div>
+    <p class="section-subtitle">
+      These are featured sections for showcasing your best work and getting people to commission you.
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h2>🎨 Art Focus</h2>
+        <p class="muted">
+          I specialize in character design, creature anatomy, transformation sequences, and expressive poses.
+          I love mixing cute + creepy.
+        </p>
+        <div class="divider"></div>
+        <p><b>Main Species:</b> Foxes, wolves, cats, hybrids (edit)</p>
+        <p><b>Style:</b> Semi-realistic / anime / cartoon blend (edit)</p>
+        <p><b>Common Topics:</b> Infection, transfur, sci-fi horror (edit)</p>
+      </div>
+
+      <div class="card">
+        <h2>🧬 Lore & Worlds</h2>
+        <p class="muted">
+          My artwork often connects into story universes. Characters have names, factions, infections,
+          transformations, and lore.
+        </p>
+        <div class="divider"></div>
+        <p><b>Universe Name:</b> Ice Nine / Living Null (edit)</p>
+        <p><b>Character Focus:</b> Lys, Spellborn, Paw family (edit)</p>
+        <p><b>Genre:</b> Sci-fi fantasy horror</p>
+      </div>
+
+      <div class="card">
+        <h2>💸 Commission Status</h2>
+        <p class="muted">
+          I offer commissions for character art, ref sheets, story scenes, transformation sequences,
+          and creature designs.
+        </p>
+        <div class="divider"></div>
+        <p><b>Status:</b> OPEN / CLOSED (edit)</p>
+        <p><b>Turnaround:</b> 1-3 weeks (edit)</p>
+        <p><b>Payment:</b> PayPal / CashApp (edit)</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- GALLERY PAGE -->
+<div class="page" id="gallery">
+
+  <div class="section">
+    <div class="section-title">🖼 Gallery</div>
+    <p class="section-subtitle">
+      Search and filter your artworks. Click any image to open the full modal view.
+    </p>
+
+    <div class="gallery-controls">
+      <input type="text" id="searchBox" placeholder="Search artworks by title or tag..." oninput="renderGallery()" />
+
+      <select id="tagFilter" onchange="renderGallery()">
+        <option value="all">All Tags</option>
+        <option value="furry">Furry</option>
+        <option value="transformation">Transformation</option>
+        <option value="horror">Horror</option>
+        <option value="scifi">Sci-Fi</option>
+        <option value="commission">Commission</option>
+        <option value="oc">OC</option>
+        <option value="sketch">Sketch</option>
+        <option value="animation">Animation</option>
+      </select>
+
+      <select id="sortFilter" onchange="renderGallery()">
+        <option value="newest">Sort: Newest</option>
+        <option value="oldest">Sort: Oldest</option>
+        <option value="az">Sort: A-Z</option>
+        <option value="za">Sort: Z-A</option>
+      </select>
+
+      <button onclick="resetFilters()">Reset</button>
+    </div>
+
+    <div class="gallery" id="galleryGrid"></div>
+
+    <div class="divider"></div>
+
+    <div class="note">
+      ⚠ To add more artworks, scroll down to the JavaScript section and add more entries inside the <b>artworks[]</b> list.
+      This website can handle hundreds of images.
+    </div>
+  </div>
+
+</div>
+
+<!-- COMMISSIONS PAGE -->
+<div class="page" id="commissions">
+
+  <div class="section">
+    <div class="section-title">💸 Commissions</div>
+    <p class="section-subtitle">
+      Commission me for furry artwork, character design, ref sheets, transformation sequences, and more.
+      Edit everything here to match your style.
+    </p>
+
+    <div class="success">
+      ✅ You can copy this page and paste it directly into DeviantArt journal posts too.
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="grid-3">
+      <div class="price-card">
+        <div class="badge">Starter</div>
+        <h3>Sketch Headshot</h3>
+        <div class="price">$10</div>
+        <ul>
+          <li>Simple sketch</li>
+          <li>Flat shading (optional)</li>
+          <li>1 character</li>
+          <li>Simple background</li>
+          <li>Perfect for quick OCs</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="badge">Popular</div>
+        <h3>Full Body Character</h3>
+        <div class="price">$40</div>
+        <ul>
+          <li>Full color</li>
+          <li>Shading + highlights</li>
+          <li>Simple background</li>
+          <li>One character</li>
+          <li>Custom pose</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="badge">Premium</div>
+        <h3>Scene / Story Art</h3>
+        <div class="price">$80+</div>
+        <ul>
+          <li>Full scene</li>
+          <li>Detailed lighting</li>
+          <li>Background included</li>
+          <li>Multiple characters possible</li>
+          <li>Story-driven artwork</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>🧬 Transformation / Infection Commissions</h2>
+        <p class="muted">
+          I can create transformation-themed artwork such as infection spreads, transfur stages,
+          body morphing, and story progression sequences.
+        </p>
+
+        <div class="divider"></div>
+
+        <p><b>Examples:</b></p>
+        <ul class="muted">
+          <li>Stage 1: Symptoms begin</li>
+          <li>Stage 2: Fur/skin changes</li>
+          <li>Stage 3: Body proportions shift</li>
+          <li>Stage 4: Tail/ears develop</li>
+          <li>Stage 5: Full creature transformation</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <p class="muted">
+          Price depends on complexity and number of stages.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>📦 Commission Add-ons</h2>
+        <p class="muted">
+          Add-ons increase quality and detail.
+        </p>
+
+        <div class="divider"></div>
+
+        <ul class="muted">
+          <li><b>Extra character:</b> +50% base price</li>
+          <li><b>Detailed background:</b> +$20 to $60</li>
+          <li><b>Alt versions:</b> +$10 each</li>
+          <li><b>NSFW version:</b> +$15</li>
+          <li><b>Reference sheet:</b> +$60</li>
+          <li><b>Animation / GIF:</b> +$100+</li>
+          <li><b>Commercial license:</b> +$150+</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="note">
+          ⚠ Make sure to change these prices to match your real rates.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card">
+      <h2>📋 Commission Form Template</h2>
+      <p class="muted">
+        Copy/paste this into messages when someone asks for a commission.
+      </p>
+
+      <div class="divider"></div>
+
+      <pre style="white-space: pre-wrap; color: var(--muted); font-size: 0.95em;">
+Commission Request Template:
+
+1. Character Name:
+2. Species:
+3. Personality / Mood:
+4. Outfit / Accessories:
+5. Pose / Expression:
+6. Background? (Yes/No):
+7. SFW/NSFW:
+8. Transformation theme? (Yes/No):
+9. References (links/images):
+10. Deadline (if needed):
+11. Payment method:
+      </pre>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TOS PAGE -->
+<div class="page" id="tos">
+
+  <div class="section">
+    <div class="section-title">📜 Terms of Service (TOS)</div>
+    <p class="section-subtitle">
+      These terms protect you as an artist. Edit them to match your rules.
+    </p>
+
+    <div class="card">
+      <h2>✅ What I Will Draw</h2>
+      <ul class="muted">
+        <li>Furry characters (anthro and feral)</li>
+        <li>Original characters</li>
+        <li>Transformation / infection sequences</li>
+        <li>Light horror themes</li>
+        <li>Fantasy / sci-fi creatures</li>
+        <li>Fanart (depending on rules)</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <h2>❌ What I Will NOT Draw</h2>
+      <ul class="muted">
+        <li>Hate content or harassment art</li>
+        <li>Extreme gore</li>
+        <li>Illegal content</li>
+        <li>Anything involving minors in NSFW</li>
+        <li>Anything I feel uncomfortable with</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <h2>💰 Payment</h2>
+      <p class="muted">
+        Payment is required before work begins unless otherwise agreed.  
+        I accept PayPal / CashApp / other methods (edit this).
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>⏳ Refunds</h2>
+      <p class="muted">
+        Refunds depend on the stage of completion.  
+        If I have not started, full refund.  
+        If sketch is done, partial refund.  
+        If finished, no refund.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>🖼 Usage Rights</h2>
+      <p class="muted">
+        You may use the art for personal use, profile pictures, and social media.
+        You may NOT resell or claim ownership unless you purchased a commercial license.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>✍ Artist Credit</h2>
+      <p class="muted">
+        Please credit me whenever posting my artwork online.  
+        Do not remove signatures/watermarks.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>🛠 Revisions</h2>
+      <p class="muted">
+        Minor revisions are included (color adjustments, small edits).  
+        Major revisions (pose changes, full redraw) may cost extra.
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="danger">
+        ⚠ If a commissioner breaks these terms, I reserve the right to cancel the commission.
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FAQ PAGE -->
+<div class="page" id="faq">
+  <div class="section">
+    <div class="section-title">❓ FAQ</div>
+    <p class="section-subtitle">
+      This page answers common questions. You can expand or delete questions as needed.
+    </p>
+
+    <div class="grid-2">
+
+      <details>
+        <summary>How do I commission you?</summary>
+        <p>
+          Message me through DeviantArt, FurAffinity, Discord, or email.
+          Fill out the commission template and include references.
+        </p>
+      </details>
+
+      <details>
+        <summary>How long does a commission take?</summary>
+        <p>
+          Usually 1-3 weeks depending on complexity and how many commissions are in queue.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do you do transformation / infection art?</summary>
+        <p>
+          Yes. I can do staged transformations, infection spreads, story scenes,
+          and creature conversions.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I repost your art?</summary>
+        <p>
+          Yes, as long as you credit me and do not remove watermarks.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I use your art for my YouTube or Twitch?</summary>
+        <p>
+          Yes for personal branding. For commercial use or merchandise,
+          you must purchase a commercial license.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do you do ref sheets?</summary>
+        <p>
+          Yes. Ref sheets include front/back views, accessories, color palette,
+          and optional transformation variants.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do you accept payment plans?</summary>
+        <p>
+          Sometimes. For large commissions, payment plans may be possible.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can you draw my Minecraft skin as a furry?</summary>
+        <p>
+          Yes. If you provide your Minecraft skin or reference,
+          I can adapt it into an anthro furry character design.
+        </p>
+      </details>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="note">
+      💡 Add more FAQ questions anytime by copying and pasting the &lt;details&gt; blocks.
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="contact">
+  <div class="section">
+    <div class="section-title">📨 Contact</div>
+    <p class="section-subtitle">
+      You can contact me for commissions, collaborations, art trades, or questions.
+      This form does NOT automatically send emails unless you use a service (explained below).
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>📌 Direct Contact</h2>
+        <p class="muted">
+          Use these links to reach me quickly:
+        </p>
+
+        <div class="divider"></div>
+
+        <p><b>Email:</b> pawsolaris@gmail.com</p>
+        <p><b>Discord:</b> YourDiscord#0000</p>
+        <p><b>DeviantArt:</b> <a href="https://www.deviantart.com/" target="_blank" style="color:var(--accent);">Profile Link</a></p>
+        <p><b>FurAffinity:</b> <a href="https://www.furaffinity.net/" target="_blank" style="color:var(--accent);">Profile Link</a></p>
+        <p><b>YouTube:</b> <a href="https://www.youtube.com/" target="_blank" style="color:var(--accent);">Channel Link</a></p>
+
+        <div class="divider"></div>
+
+        <div class="success">
+          ✅ Best method: Email or DeviantArt messages.
+        </div>
+      </div>
+
+      <div class="card contact-form">
+        <h2>📝 Contact Form</h2>
+        <p class="muted">
+          This form uses "mailto:" to open an email draft in the user’s email program.
+        </p>
+
+        <div class="divider"></div>
+
+        <input type="text" id="contactName" placeholder="Your name" />
+        <input type="text" id="contactSubject" placeholder="Subject (Commission, Question, etc.)" />
+        <textarea id="contactMessage" placeholder="Write your message here..."></textarea>
+
+        <button onclick="sendEmail()">Send Message</button>
+
+        <div class="divider"></div>
+
+        <div class="note">
+          ⚠ This is not a real server-side form.
+          If you want it to send messages automatically, you can use Netlify Forms.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <strong id="modalTitle">Artwork Title</strong>
+      <button onclick="closeModal()">Close</button>
+    </div>
+
+    <div class="modal-body">
+      <img id="modalImage" src="" alt="Artwork Preview" />
+      <div class="modal-details">
+        <h2 id="modalName">Title</h2>
+        <p id="modalDesc">Description</p>
+        <p class="muted"><b>Tags:</b> <span id="modalTags"></span></p>
+        <p class="muted"><b>Source Link:</b> <a id="modalLink" href="#" target="_blank">Open Post</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    © 2026 YourNameHere • Ultra Portfolio Website • Built for DeviantArt / FurAffinity / Art Communities
+  </p>
+  <p>
+    <span class="muted">Hosted on GitHub Pages or Netlify • Single-file HTML Website</span>
+  </p>
+</footer>
+
+<script>
+/* ======================================================
+   AGE GATE SETTINGS
+====================================================== */
+
+function allowAdultContent() {
+  localStorage.setItem("adultAllowed", "yes");
+  document.getElementById("agegate").style.display = "none";
+}
+
+function denyAdultContent() {
+  localStorage.setItem("adultAllowed", "no");
+  document.getElementById("agegate").style.display = "none";
+  alert("Safe Mode enabled. Adult content should be hidden if you set up NSFW sections.");
+}
+
+(function checkAgeGate() {
+  let saved = localStorage.getItem("adultAllowed");
+  if (saved === "yes" || saved === "no") {
+    document.getElementById("agegate").style.display = "none";
+  }
+})();
+
+/* ======================================================
+   THEME SWITCHER
+====================================================== */
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+}
+
+(function loadTheme() {
+  let theme = localStorage.getItem("theme");
+  if (theme === "light") {
+    document.body.classList.add("light");
+  }
+})();
+
+/* ======================================================
+   PAGE SYSTEM
+====================================================== */
+
+function showPage(pageId, button) {
+  let pages = document.querySelectorAll(".page");
+  pages.forEach(p => p.classList.remove("active"));
+
+  let target = document.getElementById(pageId);
+  if (target) target.classList.add("active");
+
+  let buttons = document.querySelectorAll(".nav-links button");
+  buttons.forEach(b => b.classList.remove("active"));
+  if (button) button.classList.add("active");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ======================================================
+   CONTACT FORM (MAILTO)
+====================================================== */
+
+function sendEmail() {
+  let name = document.getElementById("contactName").value.trim();
+  let subject = document.getElementById("contactSubject").value.trim();
+  let message = document.getElementById("contactMessage").value.trim();
+
+  if (!name || !subject || !message) {
+    alert("Please fill out all fields.");
+    return;
+  }
+
+  let email = "youremail@gmail.com";
+  let fullSubject = encodeURIComponent(subject + " (From: " + name + ")");
+  let fullBody = encodeURIComponent(message + "\n\n---\nSent from my portfolio website.");
+
+  window.location.href = `mailto:${email}?subject=${fullSubject}&body=${fullBody}`;
+}
+
+/* ======================================================
+   ARTWORK DATA (EDIT THIS TO ADD YOUR ART)
+====================================================== */
+
+const artworks = [
+  {
+    title: "Fox Transformation Scene",
+    description: "A dramatic furry transformation scene with glowing infection energy.",
+    tags: ["transformation", "furry", "horror", "scifi"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+1",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "OC Character Portrait",
+    description: "Portrait of my OC with neon lighting and sci-fi atmosphere.",
+    tags: ["oc", "furry"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+2",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "Alien Infection Concept",
+    description: "Creature infection design concept art inspired by sci-fi horror themes.",
+    tags: ["horror", "scifi", "oc"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+3",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "Commission Example",
+    description: "Example of a full body commission with shading and custom pose.",
+    tags: ["commission", "furry"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+4",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "Sketch Concept Sheet",
+    description: "Sketch page showing creature anatomy and transformation stages.",
+    tags: ["sketch", "transformation", "scifi"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+5",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "Magic Spellborn Scene",
+    description: "Fantasy-themed character casting a spell with glowing effects.",
+    tags: ["oc", "furry"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+6",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "Horror Creature Closeup",
+    description: "A creepy creature portrait with sharp teeth and eerie lighting.",
+    tags: ["horror", "scifi"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+7",
+    link: "https://www.deviantart.com/"
+  },
+  {
+    title: "Animated Test Frame",
+    description: "Animation frame test for a transformation sequence (concept).",
+    tags: ["animation", "transformation"],
+    image: "https://via.placeholder.com/800x500.png?text=Artwork+8",
+    link: "https://www.youtube.com/"
+  }
+];
+
+/* ======================================================
+   GALLERY RENDER SYSTEM
+====================================================== */
+
+function resetFilters() {
+  document.getElementById("searchBox").value = "";
+  document.getElementById("tagFilter").value = "all";
+  document.getElementById("sortFilter").value = "newest";
+  renderGallery();
+}
+
+function renderGallery() {
+  let grid = document.getElementById("galleryGrid");
+  if (!grid) return;
+
+  let search = document.getElementById("searchBox").value.toLowerCase().trim();
+  let tag = document.getElementById("tagFilter").value;
+  let sort = document.getElementById("sortFilter").value;
+
+  let filtered = artworks.filter(a => {
+    let matchesSearch =
+      a.title.toLowerCase().includes(search) ||
+      a.description.toLowerCase().includes(search) ||
+      a.tags.join(" ").toLowerCase().includes(search);
+
+    let matchesTag = (tag === "all") || a.tags.includes(tag);
+    return matchesSearch && matchesTag;
+  });
+
+  if (sort === "az") {
+    filtered.sort((a,b) => a.title.localeCompare(b.title));
+  } else if (sort === "za") {
+    filtered.sort((a,b) => b.title.localeCompare(a.title));
+  } else if (sort === "oldest") {
+    filtered.reverse();
+  }
+
+  grid.innerHTML = "";
+
+  filtered.forEach((art, index) => {
+    let div = document.createElement("div");
+    div.className = "art-card";
+    div.onclick = () => openModal(art);
+
+    div.innerHTML = `
+      <img src="${art.image}" alt="${art.title}">
+      <div class="art-info">
+        <h3>${art.title}</h3>
+        <p>${art.description}</p>
+        <div class="art-meta">
+          ${art.tags.map(t => `<span>${t}</span>`).join("")}
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(div);
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="note">No artworks found. Try a different search or filter.</div>`;
+  }
+}
+
+(function initGallery() {
+  renderGallery();
+})();
+
+/* ======================================================
+   MODAL SYSTEM
+====================================================== */
+
+function openModal(art) {
+  document.getElementById("modalTitle").innerText = art.title;
+  document.getElementById("modalName").innerText = art.title;
+  document.getElementById("modalDesc").innerText = art.description;
+  document.getElementById("modalImage").src = art.image;
+  document.getElementById("modalTags").innerText = art.tags.join(", ");
+
+  let link = document.getElementById("modalLink");
+  link.href = art.link;
+
+  document.getElementById("modal").classList.add("active");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("active");
+}
+
+document.getElementById("modal").addEventListener("click", function(e) {
+  if (e.target.id === "modal") closeModal();
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeModal();
+});
+</script>
+
+</body>
+</html>
